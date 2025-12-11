@@ -6,6 +6,8 @@ import "./Game.css";
 
 const STORAGE_KEY = "treasure_hunt_session_v1";
 
+const baseUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:4000';
+
 export default function Game() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -108,7 +110,7 @@ export default function Game() {
       try {
         setLoading(true);
         
-        const startRes = await fetch("http://localhost:4000/api/game/start", {
+        const startRes = await fetch(`${baseUrl}/api/game/start`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ 
@@ -153,7 +155,7 @@ export default function Game() {
         
         console.log(`Fetching question ${current} for session ${sessionId}`);
         
-        const res = await fetch(`http://localhost:4000/api/game/question/${current}`, {
+        const res = await fetch(`${baseUrl}/api/game/question/${current}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ 
@@ -193,7 +195,7 @@ export default function Game() {
   useEffect(() => {
     const loadBoard = async () => {
       try {
-        const res = await fetch("http://localhost:4000/api/leaderboard");
+        const res = await fetch(`${baseUrl}/api/leaderboard`);
         const data = await res.json();
 
         if (Array.isArray(data)) setLeaderboard(data);
@@ -726,7 +728,7 @@ const generateSocialCard = () => {
     launchConfetti();
 
     try {
-      await fetch("http://localhost:4000/api/leaderboard/submit", {
+      await fetch(`${baseUrl}/api/leaderboard/submit`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -735,7 +737,7 @@ const generateSocialCard = () => {
         }),
       });
 
-      const res = await fetch("http://localhost:4000/api/leaderboard");
+      const res = await fetch(`${baseUrl}/api/leaderboard`);
       const data = await res.json();
 
       if (Array.isArray(data)) setLeaderboard(data);
@@ -753,7 +755,7 @@ const generateSocialCard = () => {
 
     try {
       const res = await fetch(
-        `http://localhost:4000/api/game/alternate/${wrongId}`,
+        `${baseUrl}/api/game/alternate/${wrongId}`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -800,7 +802,7 @@ const generateSocialCard = () => {
           answer: userAnswer
         });
 
-        const verifyRes = await fetch(`http://localhost:4000/api/game/verify`, {
+        const verifyRes = await fetch(`${baseUrl}/api/game/verify`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

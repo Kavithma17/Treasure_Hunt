@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import './FillBlankQuestion.css';
 
+const baseUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:4000';
+
 export default function FillBlankQuestion({ question, sessionId, onAnswerResult }) {
   const [answer, setAnswer] = useState("");
   const [feedback, setFeedback] = useState("");
@@ -10,7 +12,7 @@ export default function FillBlankQuestion({ question, sessionId, onAnswerResult 
     if (!sessionId || isCorrect) return;
 
     try {
-      const res = await fetch("http://localhost:4000/api/game/answer", {
+      const res = await fetch(`${baseUrl}/api/game/answer`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

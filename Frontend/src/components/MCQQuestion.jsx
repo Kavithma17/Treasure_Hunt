@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import './MCQQuestion.css';
 
+const baseUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:4000';
+
 export default function MCQQuestion({ question, sessionId, onAnswerResult }) {
   const [selected, setSelected] = useState(null);
   const [feedback, setFeedback] = useState("");
@@ -17,7 +19,7 @@ export default function MCQQuestion({ question, sessionId, onAnswerResult }) {
     if (!sessionId) return;
 
     try {
-      const res = await fetch("http://localhost:4000/api/game/answer", {
+      const res = await fetch(`${baseUrl}/api/game/answer`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
