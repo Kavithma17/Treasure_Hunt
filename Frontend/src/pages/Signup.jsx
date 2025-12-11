@@ -93,7 +93,7 @@ function SignupPage() {
     setError('');
 
     try {
-      const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+      const baseUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:4000';
       const resp = await fetch(`${baseUrl}/api/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -110,7 +110,7 @@ function SignupPage() {
       const data = await resp.json();
       setPlayerKey(data.key);
       setShowKey(true);
-    } catch (err) {
+    } catch {
       setError('Failed to register. Please try again.');
     } finally {
       setIsLoading(false);

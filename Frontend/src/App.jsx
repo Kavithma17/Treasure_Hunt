@@ -1,4 +1,4 @@
-import { useState } from 'react'
+
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from './pages/LandingPage'
@@ -14,7 +14,7 @@ import AdminLogin from './pages/AdminLogin';
 import AdminGuard from './components/AdminGuard';
 
 function App() {
-  const [count, setCount] = useState(0)
+
 
   return (
     <>

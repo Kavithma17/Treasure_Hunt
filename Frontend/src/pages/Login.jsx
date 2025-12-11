@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './Signup.css';
 
-const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+const baseUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:4000';
 
 export default function LoginPage() {
   const navigate = useNavigate();

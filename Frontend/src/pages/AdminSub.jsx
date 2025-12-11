@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Admin.css';
 
-const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+const baseUrl = import.meta.env.VITE_API_URL ?? 'http://localhost:4000';
 const defaultToken = import.meta.env.VITE_ADMIN_TOKEN || '';
 
 const emptyOption = () => ({ id: '', text: '' });
