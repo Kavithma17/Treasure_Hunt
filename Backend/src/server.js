@@ -52,8 +52,8 @@ const devFallbackOrigins = [
   'http://127.0.0.1:5173',
   'http://localhost:3000',
   'http://127.0.0.1:3000',
-  'http://cyberzone.ruh.ac.lk',
-  'https://cyberzone.ruh.ac.lk',
+  'http://cyberzone.eng.ruh.ac.lk',
+  'https://cyberzone.eng.ruh.ac.lk',
 ];
 
 const allowedOrigins = [...new Set([...explicitOrigins, ...(explicitOrigins.length === 0 ? devFallbackOrigins : [])])];
