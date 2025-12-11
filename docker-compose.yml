@@ -1,0 +1,18 @@
+services:
+  backend:
+    build: ./Backend
+    ports:
+      - "4000:4000"
+    dns:
+      - 8.8.8.8
+    env_file:
+      - ./Backend/.env
+
+  frontend:
+    build: ./Frontend
+    ports:
+      - "5174:5173"
+    environment:
+      - VITE_API_URL=http://localhost:4000
+    depends_on:
+      - backend
