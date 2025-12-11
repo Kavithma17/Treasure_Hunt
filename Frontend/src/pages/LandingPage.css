@@ -65,10 +65,11 @@
 
 .hero-title {
   font-size: clamp(2.5rem, 8vw, 5rem);
-  font-weight: 900;
-  color: white;
-  margin-bottom: 1.5rem;
+  font-weight: 1000;
+  color: rgb(255, 255, 255);
+  margin-bottom: 1rem;
   line-height: 1.1;
+  margin-top: 30px;
   animation: slideUp 0.8s ease-out;
 }
 
@@ -84,12 +85,13 @@
 }
 
 .gradient-text {
-  background: linear-gradient(90deg, #06b6d4, #3b82f6, #9333ea);
+  background: linear-gradient(90deg, #ff9ff2, #5395ff, #ac53ff);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: gradientShift 3s ease infinite;
+  font-size: 3rem;
 }
 
 @keyframes gradientShift {
@@ -99,7 +101,7 @@
 
 .hero-subtitle {
   font-size: clamp(1.1rem, 3vw, 1.5rem);
-  color: #cbd5e1;
+  color: #ffffff;
   max-width: 800px;
   margin: 0 auto 3rem;
   line-height: 1.6;
@@ -117,9 +119,9 @@
 }
 
 .stat-card {
-  background: rgba(30, 41, 59, 0.5);
+  background: rgba(0, 0, 0, 0.537);
   backdrop-filter: blur(8px);
-  border: 2px solid #334155;
+  border: 2px solid rgba(85, 204, 255, 0.829);
   border-radius: 1rem;
   padding: 2rem 1.5rem;
   transition: all 0.3s ease;
@@ -127,7 +129,7 @@
 
 .stat-card:hover {
   transform: scale(1.05);
-  border-color: #06b6d4;
+  border-color: #2bc7e2;
   box-shadow: 0 8px 30px rgba(6, 182, 212, 0.3);
 }
 
@@ -159,7 +161,7 @@
 }
 
 .stat-label {
-  color: #94a3b8;
+  color: #ffffff;
   font-size: 1rem;
 }
 
@@ -220,4 +222,24 @@
   right: 0;
   height: 8rem;
   background: linear-gradient(to top, #020617, transparent);
+}
+.motivation-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(90deg, #ffd700 20%, #ff8c00 90%);
+  color: #222;
+  font-weight: bold;
+  border-radius: 12px;
+  padding: 1em 1.2em;
+  margin: 1.5em 0 2em 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  font-size: 1.14em;
+}
+.motivation-emoji {
+  font-size: 1.6em;
+  margin-right: 0.55em;
+}
+.motivation-text {
+  font-weight: 500;
 }

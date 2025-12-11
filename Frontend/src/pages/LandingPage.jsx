@@ -57,11 +57,13 @@ function LandingPage({ user }) {
         <div className="hero-content">
           <div className="hero-text">
             <h1 className="hero-title">
-              Welcome to <span className="gradient-text">Treasure Hunt</span>
+              Welcome to <br></br> <span className="gradient-text">Treasure Hunt</span>
             </h1>
             
             <p className="hero-subtitle">
-              Uncover secrets, solve puzzles, and race to find the final treasure in this thrilling CTF-style treasure hunt!
+              Prove your skills, beat the competition, and claim glorious rewards! 
+              <b><br></br>The journey to victory and prizes starts now. Will you be the ultimate
+                 treasure hunter?</b>
             </p>
 
             {/* Stats Counter */}
@@ -118,7 +120,7 @@ function LandingPage({ user }) {
             </div>
           </div>
         </div>
-
+ 
         <div className="hero-fade"></div>
       </section>
 

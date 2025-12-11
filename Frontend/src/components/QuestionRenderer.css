@@ -1,0 +1,14 @@
+/* Clue styling shown above all question types */
+.question-renderer {
+  width: 100%;
+}
+
+.question-clue {
+  margin: 8px 0 16px;
+  padding: 10px 12px;
+  border-left: 4px solid #ffd54f;
+  background: rgba(255, 213, 79, 0.12);
+  color: #fff8e1;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}

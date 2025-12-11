@@ -1,0 +1,76 @@
+.photo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fefefe;
+  border: 2px solid #ffd700; /* gold border for treasure theme */
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 500px;
+  margin: 20px auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.photo-task-image {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  border: 2px solid #eee;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.photo-question-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 10px 0 15px;
+  text-align: center;
+  color: #333;
+}
+
+.photo-input {
+  width: 80%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.photo-input:focus {
+  outline: none;
+  border-color: #ffd700;
+  box-shadow: 0 0 5px rgba(255, 215, 0, 0.6);
+}
+
+.photo-submit-btn {
+  background-color: #ffd700;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.photo-submit-btn:hover {
+  background-color: #ffbf00;
+  transform: scale(1.05);
+}
+
+.hint {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #666;
+  text-align: center;
+}
+
+.photo-feedback {
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+.photo-feedback.correct { color: #2e7d32; }
+.photo-feedback.wrong { color: #c62828; }
+.photo-feedback.error { color: #8e24aa; }
+
+.photo-missing { color: #ff8f00; margin-bottom: 10px; }
