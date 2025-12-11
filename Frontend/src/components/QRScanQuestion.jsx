@@ -44,6 +44,19 @@ export default function QRScanQuestion({ question, sessionId, onAnswerResult }) 
 
     const startScanner = async () => {
       try {
+        // 1. Check if browser supports camera API (often disabled on HTTP)
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+          throw new Error("Camera API unavailable. Browser likely blocks it on HTTP.");
+        }
+
+        // 2. Explicitly request permission
+        // This forces the popup if not already granted
+        const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+        
+        // Stop stream immediately (we just needed permission)
+        stream.getTracks().forEach(track => track.stop());
+
+        // 3. Start Scanner
         html5QrCode = new Html5Qrcode("reader");
         const config = { fps: 10, qrbox: { width: 250, height: 250 } };
         
@@ -51,7 +64,6 @@ export default function QRScanQuestion({ question, sessionId, onAnswerResult }) 
           { facingMode: "environment" },
           config,
           (decodedText) => {
-            // Success callback
             if (decodedText) {
               setCode(decodedText);
               submitAnswer(decodedText);
@@ -59,13 +71,25 @@ export default function QRScanQuestion({ question, sessionId, onAnswerResult }) 
             }
           },
           (errorMessage) => {
-            // Error callback (scanning failure, common)
-            // console.log(errorMessage); 
+            // ignore frame errors
           }
         );
       } catch (err) {
         console.error("Error starting scanner:", err);
-        setScanError("Camera access failed or not available");
+        
+        let msg = "Camera access failed.";
+        
+        if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+             msg = "Permission denied. Please allow camera access.";
+        } else if (err.name === 'NotFoundError') {
+            msg = "No camera found on this device.";
+        } else if (err.message && err.message.includes("HTTP")) {
+            msg = "Camera requires HTTPS to work.";
+        } else {
+            msg = `Camera error: ${err.message || 'Unknown'}. Try using HTTPS.`;
+        }
+        
+        setScanError(msg);
       }
     };
 
