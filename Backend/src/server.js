@@ -51,7 +51,9 @@ const devFallbackOrigins = [
   'http://localhost:5173',
   'http://127.0.0.1:5173',
   'http://localhost:3000',
-  'http://127.0.0.1:3000'
+  'http://127.0.0.1:3000',
+  'http://cyberzone.ruh.ac.lk',
+  'https://cyberzone.ruh.ac.lk',
 ];
 
 const allowedOrigins = [...new Set([...explicitOrigins, ...(explicitOrigins.length === 0 ? devFallbackOrigins : [])])];
@@ -98,7 +100,7 @@ function createSession(questionIds, playerKey = null) {
     playerKey,
     completed: false
   });
-  
+
   console.log(`[SESSION] Created ${sessionId} with ${questionIds.length} questions`);
   return sessionId;
 }
@@ -123,7 +125,7 @@ function touchSession(sessionId) {
 setInterval(() => {
   const now = Date.now();
   const EXPIRY_TIME = 2 * 60 * 60 * 1000; // 2 hours
-  
+
   let cleaned = 0;
   for (const [sessionId, session] of gameSessions.entries()) {
     if (now - session.lastActivity > EXPIRY_TIME) {
@@ -132,7 +134,7 @@ setInterval(() => {
       cleaned++;
     }
   }
-  
+
   if (cleaned > 0) {
     console.log(`[SESSION] Cleaned up ${cleaned} expired sessions`);
   }
@@ -151,7 +153,7 @@ async function getQuestionByIndex(sessionId, index) {
   }
 
   const idx = Number(index);
-  
+
   // 🔐 SECURITY: Can only access current question
   if (idx !== session.currentIndex) {
     console.warn(`[SECURITY] Attempted to access question ${idx} but current is ${session.currentIndex}`);
@@ -165,7 +167,7 @@ async function getQuestionByIndex(sessionId, index) {
   const qid = session.questionIds[idx];
   const doc = await SubQuestion.findById(qid).lean();
   if (!doc) return null;
-  
+
   touchSession(sessionId);
   return toSafeQuestion(doc, idx + 1);
 }
@@ -176,7 +178,7 @@ async function verifyAnswer(sessionId, questionId, questionIndex, userAnswer) {
   if (!session) return { valid: false, error: 'Invalid session' };
 
   const idx = Number(questionIndex);
-  
+
   // 🔐 SECURITY: Verify it's the current question
   if (idx !== session.currentIndex) {
     console.warn(`[SECURITY] Answer attempt for wrong question index`);
@@ -207,7 +209,7 @@ async function verifyAnswer(sessionId, questionId, questionIndex, userAnswer) {
   if (isCorrect) {
     session.correctAnswers.add(idx);
     session.currentIndex = idx + 1;
-    
+
     // Check if game completed
     if (session.currentIndex >= session.questionIds.length) {
       session.completed = true;
@@ -216,7 +218,7 @@ async function verifyAnswer(sessionId, questionId, questionIndex, userAnswer) {
   }
 
   touchSession(sessionId);
-  
+
   return {
     valid: true,
     correct: isCorrect,
@@ -317,7 +319,7 @@ function toSafeQuestion(doc, indexBaseOne) {
   }
 
   // For fib and qr, don't send any answer data
-  
+
   return safeQuestion;
 }
 
@@ -355,9 +357,9 @@ app.post('/api/game/question/:index', async (req, res) => {
     }
 
     const question = await getQuestionByIndex(sessionId, index);
-    
+
     if (!question) {
-      return res.status(403).json({ 
+      return res.status(403).json({
         error: 'Cannot access this question',
         message: 'Complete the current question first or invalid session'
       });
@@ -385,20 +387,20 @@ app.post('/api/game/verify', async (req, res) => {
     const { sessionId, questionId, questionIndex, answer } = req.body || {};
 
     if (!sessionId || !questionId || questionIndex === undefined || !answer) {
-      return res.status(400).json({ 
-        valid: false, 
-        error: 'Missing required fields' 
+      return res.status(400).json({
+        valid: false,
+        error: 'Missing required fields'
       });
     }
 
     const result = await verifyAnswer(sessionId, questionId, questionIndex, answer);
-    
+
     res.json(result);
   } catch (err) {
     console.error('[ERROR] Answer verification:', err);
-    res.status(500).json({ 
-      valid: false, 
-      error: 'Server error' 
+    res.status(500).json({
+      valid: false,
+      error: 'Server error'
     });
   }
 });
@@ -434,7 +436,7 @@ app.post('/api/game/alternate/:questionId', async (req, res) => {
 
     // Find alternate of same type, not already used
     const usedIds = session.questionIds.map(id => new mongoose.Types.ObjectId(id));
-    
+
     const alternate = await SubQuestion.findOne({
       _id: { $nin: usedIds },
       type: currentQuestion.type,
@@ -450,7 +452,7 @@ app.post('/api/game/alternate/:questionId', async (req, res) => {
     touchSession(sessionId);
 
     const safeQuestion = toSafeQuestion(alternate, questionIndex + 1);
-    
+
     res.json({ question: safeQuestion });
   } catch (err) {
     console.error('[ERROR] Alternate question:', err);
@@ -571,9 +573,9 @@ app.post('/api/admin/main-questions', requireAdmin, async (req, res) => {
       tags: Array.isArray(tags)
         ? tags.map(t => String(t).trim()).filter(Boolean)
         : String(tags || '')
-            .split(',')
-            .map(t => t.trim())
-            .filter(Boolean)
+          .split(',')
+          .map(t => t.trim())
+          .filter(Boolean)
     };
 
     const existing = await MainQuestion.findOne({ code: payload.code }).lean();
@@ -619,7 +621,7 @@ app.post('/api/admin/sub-questions', requireAdmin, async (req, res) => {
     }
 
     const cleanType = String(type).toLowerCase();
-    if (!['mcq','qr','fib','photo'].includes(cleanType)) {
+    if (!['mcq', 'qr', 'fib', 'photo'].includes(cleanType)) {
       return res.status(400).json({ error: 'Invalid type' });
     }
 
@@ -768,8 +770,8 @@ app.post('/api/login', async (req, res) => {
 
 // Health check
 app.get('/api/health', (_req, res) => {
-  res.json({ 
-    ok: true, 
+  res.json({
+    ok: true,
     time: new Date().toISOString(),
     activeSessions: gameSessions.size
   });
