@@ -110,6 +110,43 @@ export default function Game() {
       try {
         setLoading(true);
         
+        // Check for existing session in localStorage
+        const storedSession = localStorage.getItem(STORAGE_KEY);
+        
+        if (storedSession) {
+           console.log("Found stored session, attempting resume:", storedSession);
+           try {
+             const resumeRes = await fetch(`${baseUrl}/api/game/resume`, {
+               method: 'POST',
+               headers: { 'Content-Type': 'application/json' },
+               body: JSON.stringify({ sessionId: storedSession })
+             });
+             
+             if (resumeRes.ok) {
+               const resumeData = await resumeRes.json();
+               console.log("Resumed session:", resumeData);
+               setSessionId(resumeData.sessionId);
+               setTotalQuestions(resumeData.totalQuestions || 10);
+               setCurrent(resumeData.currentIndex);
+               // Restore correct answers map roughly based on index (assuming sequential)
+               const restoredCorrect = {};
+               for (let i = 0; i < resumeData.currentIndex; i++) {
+                 restoredCorrect[i] = true;
+               }
+               setAnsweredCorrectly(restoredCorrect);
+               setLoading(false);
+               return; // Successfully resumed
+             } else {
+               console.warn("Could not resume session, starting new one");
+               localStorage.removeItem(STORAGE_KEY);
+             }
+           } catch (e) {
+             console.error("Error resuming:", e);
+             localStorage.removeItem(STORAGE_KEY);
+           }
+        }
+
+        // Start New Game if no session or resume failed
         const startRes = await fetch(`${baseUrl}/api/game/start`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -130,6 +167,7 @@ export default function Game() {
 
         console.log('Game session started:', startData.sessionId);
         setSessionId(startData.sessionId);
+        localStorage.setItem(STORAGE_KEY, startData.sessionId); // Save to storage
         setTotalQuestions(startData.totalQuestions || 10);
 
       } catch (err) {

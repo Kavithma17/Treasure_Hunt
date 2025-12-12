@@ -405,6 +405,36 @@ app.post('/api/game/verify', async (req, res) => {
   }
 });
 
+// 🔐 NEW: Resume session (SECURE)
+app.post('/api/game/resume', async (req, res) => {
+  try {
+    const { sessionId } = req.body || {};
+
+    if (!sessionId) {
+      return res.status(400).json({ error: 'Session ID required' });
+    }
+
+    const session = getSession(sessionId);
+    if (!session) {
+      return res.status(404).json({ error: 'Session not found or expired' });
+    }
+
+    touchSession(sessionId);
+
+    res.json({
+      sessionId,
+      totalQuestions: session.questionIds.length,
+      currentIndex: session.currentIndex,
+      completed: session.correctAnswers.size || 0,
+      gameCompleted: session.completed,
+      startTime: session.startTime
+    });
+  } catch (err) {
+    console.error('[ERROR] Resume session:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 // 🔐 UPDATED: Get alternate question (SECURE)
 app.post('/api/game/alternate/:questionId', async (req, res) => {
   try {
@@ -434,16 +464,36 @@ app.post('/api/game/alternate/:questionId', async (req, res) => {
       return res.status(404).json({ error: 'Current question not found' });
     }
 
-    // Find alternate of same type, not already used
+    // Determine target type: if MCQ, switch to FIB; otherwise keep same type
+    const targetType = currentQuestion.type === 'mcq' ? 'fib' : currentQuestion.type;
+
+    // Find alternate of target type, not already used
     const usedIds = session.questionIds.map(id => new mongoose.Types.ObjectId(id));
 
     const alternate = await SubQuestion.findOne({
       _id: { $nin: usedIds },
-      type: currentQuestion.type,
+      type: targetType,
       active: true
     }).lean();
 
     if (!alternate) {
+      // Fallback: if no FIB found, try same type (or just fail if none)
+      if (targetType !== currentQuestion.type) {
+        const fallback = await SubQuestion.findOne({
+          _id: { $nin: usedIds },
+          type: currentQuestion.type,
+          active: true
+        }).lean();
+
+        if (!fallback) return res.status(404).json({ error: 'No alternate question available' });
+
+        // Use fallback
+        session.questionIds[questionIndex] = fallback._id.toString();
+        touchSession(sessionId);
+        const safeQuestion = toSafeQuestion(fallback, questionIndex + 1);
+        return res.json({ question: safeQuestion });
+      }
+
       return res.status(404).json({ error: 'No alternate question available' });
     }
 
