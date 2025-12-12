@@ -1,3 +1,97 @@
+/* ==================== Mobile Responsive ==================== */
+@media (max-width: 900px) {
+  .progress-container {
+    padding: 0.75rem 1.25rem;
+    position: sticky;
+    top: 0;
+  }
+
+  .progress-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .progress-info {
+    width: 100%;
+  }
+
+  .game-layout {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .question-section {
+    padding: 1.5rem;
+  }
+
+  .question-title {
+    gap: 0.5rem;
+  }
+
+  .question-number {
+    font-size: 1.4rem;
+  }
+
+  .question-code {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.75rem;
+  }
+
+  .clue-toggle {
+    font-size: 0.95rem;
+  }
+
+  .auto-next-banner {
+    font-size: 0.95rem;
+    padding: 0.9rem 1.25rem;
+  }
+
+  .question-navigation .next-btn {
+    font-size: 1rem;
+    padding: 1rem 1.25rem;
+  }
+
+  .game-sidebar {
+    position: relative;
+    width: 100%;
+  }
+
+  .treasure-map, .live-leaderboard {
+    padding: 1rem;
+  }
+
+  .map-item {
+    padding: 0.75rem 1rem;
+  }
+
+  .finish-card, .quit-card {
+    margin: 0 1rem 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .finish-stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+
+  .download-buttons {
+    flex-direction: column;
+  }
+
+  .download-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .leaderboard-list {
+    max-height: none;
+  }
+
+  .live-leaderboard .mini-row {
+    gap: 6px;
+  }
+}
 /* ==================== Global & Container ==================== */
 * {
   box-sizing: border-box;
