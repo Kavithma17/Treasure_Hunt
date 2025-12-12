@@ -1900,35 +1900,799 @@
 }
 
 /* ==================== Mobile Responsive ==================== */
-@media (max-width: 768px) {
-  .refresh-warning-banner {
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    transform: none;
-  }
+/* ==================== Mobile Responsive ==================== */
 
-  .warning-content {
+/* Large Tablets and Small Desktops */
+@media (max-width: 1200px) {
+  .game-layout {
+    grid-template-columns: 1fr;
+    max-width: 900px;
+  }
+  
+  .game-sidebar {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+/* Tablets */
+@media (max-width: 900px) {
+  .progress-container {
     padding: 0.75rem 1rem;
-    gap: 0.75rem;
-  }
-
-  .warning-text {
-    font-size: 0.9rem;
-  }
-
-  .quit-actions {
-    flex-direction: column;
+    position: sticky;
+    top: 0;
   }
 
   .progress-header {
     flex-direction: column;
-    gap: 0.75rem;
     align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .progress-info {
+    width: 100%;
   }
 
   .quit-game-btn {
     width: 100%;
     justify-content: center;
+  }
+
+  .game-layout {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .question-section {
+    padding: 1.5rem;
+  }
+
+  .question-title {
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .question-number {
+    font-size: 1.4rem;
+  }
+
+  .question-code {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.75rem;
+  }
+
+  .clue-toggle {
+    font-size: 0.95rem;
+    padding: 0.75rem 1.25rem;
+  }
+
+  .auto-next-banner {
+    font-size: 0.95rem;
+    padding: 0.9rem 1rem;
+  }
+
+  .question-navigation .next-btn {
+    font-size: 1rem;
+    padding: 1rem 1.5rem;
+  }
+
+  .treasure-map, .live-leaderboard {
+    padding: 1rem;
+  }
+
+  .sidebar-title {
+    font-size: 1rem;
+  }
+
+  .map-item {
+    padding: 0.75rem 1rem;
+  }
+
+  .finish-card, .quit-card {
+    margin: 0 1rem 1.5rem;
+    padding: 2rem 1.5rem;
+  }
+
+  .finish-title {
+    font-size: 2rem;
+  }
+
+  .trophy-icon {
+    font-size: 5rem;
+  }
+
+  .finish-stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .download-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .download-btn, .download-btn-large {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .share-buttons {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .leaderboard-list {
+    max-height: 400px;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .quit-actions {
+    flex-direction: column;
+  }
+}
+
+/* Mobile Landscape and Small Tablets */
+@media (max-width: 768px) {
+  .progress-container {
+    padding: 0.75rem 1rem;
+  }
+
+  .progress-label {
+    font-size: 0.85rem;
+  }
+
+  .progress-counter {
+    font-size: 0.95rem;
+  }
+
+  .game-layout {
+    padding: 0.75rem;
+    gap: 1rem;
+  }
+
+  .game-sidebar {
+    grid-template-columns: 1fr;
+  }
+
+  .question-section {
+    padding: 1.25rem;
+    border-radius: 1rem;
+  }
+
+  .question-title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .question-number {
+    font-size: 1.5rem;
+  }
+
+  .clue-content {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.25rem;
+  }
+
+  .clue-emoji {
+    font-size: 1.8rem;
+  }
+
+  .finish-card, .quit-card {
+    margin: 1rem;
+    padding: 1.5rem 1.25rem;
+    border-radius: 1.5rem;
+  }
+
+  .finish-hero {
+    margin-bottom: 2rem;
+  }
+
+  .finish-title {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .trophy-icon, .quit-icon-large {
+    font-size: 4.5rem;
+  }
+
+  .finish-badge, .quit-badge {
+    font-size: 0.85rem;
+    padding: 0.4rem 1.25rem;
+  }
+
+  .time-value {
+    font-size: 2rem;
+  }
+
+  .finish-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .stat-card {
+    padding: 1.25rem 1rem;
+  }
+
+  .download-section, .quit-download {
+    padding: 1.5rem;
+    border-radius: 1rem;
+  }
+
+  .download-title {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+
+  .download-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .download-btn, .download-btn-large {
+    padding: 1.25rem 1.25rem;
+  }
+
+  .btn-icon {
+    font-size: 2rem;
+  }
+
+  .btn-label {
+    font-size: 0.95rem;
+  }
+
+  .btn-sublabel {
+    font-size: 0.8rem;
+  }
+
+  .share-buttons {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-top: 1rem;
+  }
+
+  .share-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+  }
+
+  .leaderboard-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .leaderboard-header h3 {
+    font-size: 1.3rem;
+  }
+
+  .leaderboard-row {
+    padding: 0.875rem 1rem;
+    gap: 0.75rem;
+  }
+
+  .rank-badge {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+  }
+
+  .player-name {
+    font-size: 0.95rem;
+  }
+
+  .player-time {
+    font-size: 0.85rem;
+  }
+
+  .play-again-btn, .try-again-btn, .go-home-btn {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .rank-badge-display {
+    padding: 0.875rem 1.5rem;
+    gap: 0.5rem;
+  }
+
+  .rank-emoji {
+    font-size: 1.75rem;
+  }
+
+  .rank-name {
+    font-size: 1.25rem;
+  }
+
+  .quit-modal {
+    padding: 1.5rem;
+    max-width: 90%;
+  }
+
+  .modal-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .modal-body p {
+    font-size: 1rem;
+  }
+
+  .modal-stats {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .modal-btn {
+    padding: 0.875rem 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  .map-list {
+    max-height: 300px;
+  }
+
+  .progress-summary {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+  }
+
+  .summary-stat {
+    padding: 0.875rem;
+  }
+
+  .summary-value {
+    font-size: 1.3rem;
+  }
+
+  .refresh-warning-banner {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    transform: none;
+    width: auto;
+  }
+
+  .warning-content {
+    padding: 0.875rem 1rem;
+    gap: 0.75rem;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .warning-text {
+    font-size: 0.9rem;
+  }
+}
+
+/* Mobile Portrait */
+@media (max-width: 480px) {
+  .progress-container {
+    padding: 0.625rem 0.875rem;
+  }
+
+  .progress-label {
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+  }
+
+  .progress-counter {
+    font-size: 0.9rem;
+  }
+
+  .progress-bar {
+    height: 6px;
+  }
+
+  .quit-game-btn {
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .game-layout {
+    padding: 0.5rem;
+    gap: 0.75rem;
+  }
+
+  .question-section {
+    padding: 1rem;
+    border-radius: 0.875rem;
+  }
+
+  .question-number {
+    font-size: 1.3rem;
+  }
+
+  .question-code {
+    font-size: 0.85rem;
+    padding: 0.35rem 0.625rem;
+  }
+
+  .clue-toggle {
+    font-size: 0.9rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .clue-content {
+    padding: 1rem;
+  }
+
+  .clue-content p {
+    font-size: 0.95rem;
+  }
+
+  .auto-next-banner {
+    font-size: 0.9rem;
+    padding: 0.875rem 1rem;
+    gap: 0.375rem;
+  }
+
+  .next-btn {
+    font-size: 0.95rem;
+    padding: 1rem 1.25rem;
+  }
+
+  .treasure-map, .live-leaderboard {
+    padding: 0.875rem;
+    border-radius: 1rem;
+  }
+
+  .sidebar-title {
+    font-size: 0.95rem;
+    margin-bottom: 0.875rem;
+  }
+
+  .map-item {
+    padding: 0.625rem 0.875rem;
+    gap: 0.625rem;
+  }
+
+  .map-number {
+    width: 28px;
+    height: 28px;
+    font-size: 0.85rem;
+  }
+
+  .map-code {
+    font-size: 0.85rem;
+  }
+
+  .mini-row {
+    padding: 0.625rem;
+    gap: 0.5rem;
+  }
+
+  .mini-rank {
+    font-size: 0.8rem;
+    min-width: 28px;
+  }
+
+  .mini-name {
+    font-size: 0.85rem;
+  }
+
+  .mini-time {
+    font-size: 0.8rem;
+  }
+
+  .finish-card, .quit-card {
+    margin: 0.75rem;
+    padding: 1.25rem 1rem;
+    border-radius: 1.25rem;
+  }
+
+  .finish-hero {
+    margin-bottom: 1.5rem;
+  }
+
+  .trophy-icon, .quit-icon-large {
+    font-size: 4rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .finish-badge, .quit-badge {
+    font-size: 0.8rem;
+    padding: 0.375rem 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .finish-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .rank-badge-display {
+    padding: 0.75rem 1.25rem;
+    margin: 1rem auto;
+  }
+
+  .rank-emoji {
+    font-size: 1.5rem;
+  }
+
+  .rank-name {
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+  }
+
+  .finish-time-display {
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0.875rem;
+  }
+
+  .time-label {
+    font-size: 0.85rem;
+  }
+
+  .time-value {
+    font-size: 1.75rem;
+  }
+
+  .finish-prize {
+    padding: 1.25rem;
+    border-radius: 0.875rem;
+  }
+
+  .prize-icon {
+    font-size: 1.75rem;
+    margin-bottom: 0.625rem;
+  }
+
+  .finish-prize p {
+    font-size: 0.95rem;
+  }
+
+  .finish-stats-grid {
+    gap: 0.625rem;
+  }
+
+  .stat-card {
+    padding: 1rem 0.875rem;
+  }
+
+  .stat-icon {
+    font-size: 1.75rem;
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+  }
+
+  .download-section, .quit-download {
+    padding: 1.25rem;
+    margin: 1.5rem 0;
+    border-radius: 0.875rem;
+  }
+
+  .download-title {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .download-subtitle {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  .download-btn, .download-btn-large {
+    padding: 1rem 1rem;
+    gap: 0.875rem;
+  }
+
+  .btn-icon {
+    font-size: 1.75rem;
+  }
+
+  .btn-label {
+    font-size: 0.9rem;
+  }
+
+  .btn-sublabel {
+    font-size: 0.75rem;
+  }
+
+  .share-buttons {
+    gap: 0.625rem;
+    padding-top: 1rem;
+  }
+
+  .share-label {
+    font-size: 0.85rem;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0.25rem;
+  }
+
+  .share-btn {
+    font-size: 0.9rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .leaderboard-section {
+    margin-bottom: 1.25rem;
+  }
+
+  .leaderboard-header h3 {
+    font-size: 1.2rem;
+  }
+
+  .leaderboard-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .leaderboard-row {
+    padding: 0.75rem 0.875rem;
+    gap: 0.625rem;
+  }
+
+  .rank-badge {
+    width: 32px;
+    height: 32px;
+    font-size: 0.85rem;
+  }
+
+  .player-name {
+    font-size: 0.9rem;
+  }
+
+  .player-time {
+    font-size: 0.8rem;
+  }
+
+  .crown {
+    font-size: 1rem;
+  }
+
+  .play-again-btn, .try-again-btn, .go-home-btn {
+    padding: 1rem 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  .motivation-box {
+    padding: 1.25rem;
+    margin: 1.5rem 0;
+    border-radius: 0.875rem;
+  }
+
+  .motivation-box h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.625rem;
+  }
+
+  .motivation-box p {
+    font-size: 0.95rem;
+  }
+
+  .quit-modal {
+    padding: 1.25rem;
+    border-radius: 1.25rem;
+  }
+
+  .modal-header h2 {
+    font-size: 1.3rem;
+    margin-bottom: 0.875rem;
+  }
+
+  .modal-body p {
+    font-size: 0.95rem;
+  }
+
+  .modal-warning {
+    font-size: 0.875rem !important;
+  }
+
+  .modal-stat {
+    padding: 0.875rem;
+  }
+
+  .modal-stat .stat-label {
+    font-size: 0.8rem;
+  }
+
+  .modal-stat .stat-value {
+    font-size: 1.3rem;
+  }
+
+  .modal-btn {
+    padding: 0.875rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .error-card {
+    padding: 2rem 1.5rem;
+    max-width: 90%;
+  }
+
+  .error-icon {
+    font-size: 3rem;
+  }
+
+  .error-card h2 {
+    font-size: 1.5rem;
+  }
+
+  .error-card p {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .error-card button {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .loader-ring {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1.5rem;
+  }
+
+  .loader-text {
+    font-size: 1rem;
+  }
+
+  .warning-icon {
+    font-size: 1.25rem;
+  }
+
+  .warning-text {
+    font-size: 0.85rem;
+  }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 360px) {
+  .progress-container {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .question-section {
+    padding: 0.875rem;
+  }
+
+  .question-number {
+    font-size: 1.2rem;
+  }
+
+  .finish-title {
+    font-size: 1.3rem;
+  }
+
+  .trophy-icon, .quit-icon-large {
+    font-size: 3.5rem;
+  }
+
+  .time-value {
+    font-size: 1.5rem;
+  }
+
+  .stat-value {
+    font-size: 1.3rem;
+  }
+
+  .download-title {
+    font-size: 0.95rem;
+  }
+
+  .btn-label {
+    font-size: 0.85rem;
+  }
+
+  .leaderboard-header h3 {
+    font-size: 1.1rem;
+  }
+
+  .play-again-btn, .try-again-btn, .go-home-btn {
+    font-size: 0.9rem;
+    padding: 0.875rem 1rem;
   }
 }
