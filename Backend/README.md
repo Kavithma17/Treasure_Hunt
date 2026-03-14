@@ -8,22 +8,12 @@ Setup
 MongoDB Atlas essentials
 - Network Access: Allow your machine’s IP (or 0.0.0.0/0 for quick dev, remove later).
 - Database Access: Create a database user (username/password) and use it in the URI.
-- Connection string (Node.js SRV):
-	`mongodb+srv://kavithma:<password>@<cluster>.mongodb.net/Treasure_Hunt?retryWrites=true&w=majority&appName=<appName>`
 
 Common Errors
 - Missing MONGODB_URI: Ensure you created `Backend/.env` (NOT just `.env.example`) and set `MONGODB_URI=...`.
 - URI undefined: Exact same cause as above; server now exits early instead of half-starting.
 - Duplicate index warnings: Removed by updating `Player` model (no duplicate manual index declarations).
 - Buffering timed out: Usually connection failed (bad password / IP not whitelisted). Recheck Atlas IP allowlist and credentials.
-
-Recommended .env example
-```
-PORT=4000
-MONGODB_URI=mongodb+srv://kavithma:<password>@<cluster>.mongodb.net/Treasure_Hunt?retryWrites=true&w=majority&appName=TreasureHuntExpo
-MONGODB_DB=Treasure_Hunt
-ALLOWED_ORIGINS=http://localhost:5173
-```
 
 
 Install & Run
